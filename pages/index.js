@@ -3,27 +3,28 @@ import Link from 'next/link';
 import MainTempate, { siteTitle } from '../components/template/MainTemplate';
 import Date from '../components/Date';
 import utilStyles from '../styles/utils.module.css';
+import { getSortedPostsData } from '../lib/posts';
 
 // getServerSideProps는 페이지에 접근할 때마다 호출
-// export async function getServerSideProps() {
-//   const allPostsData = getSortedPostsData();
-//   return {
-//     props: {
-//       allPostsData,
-//     },
-//   };
-// }
-
-export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/posts');
-  const json = await response.json();
-
+export async function getServerSideProps() {
+  const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData: json.allPostsData,
+      allPostsData,
     },
   };
 }
+
+// export async function getStaticProps() {
+//   const response = await fetch('http://localhost:3000/api/posts');
+//   const json = await response.json();
+
+//   return {
+//     props: {
+//       allPostsData: json.allPostsData,
+//     },
+//   };
+// }
 
 export default function Home({ allPostsData }) {
   return (
