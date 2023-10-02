@@ -1,5 +1,7 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import MainTempate, { siteTitle } from '../components/template/MainTemplate';
+import Date from '../components/Date';
 import utilStyles from '../styles/utils.module.css';
 
 // getServerSideProps는 페이지에 접근할 때마다 호출
@@ -34,11 +36,11 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
