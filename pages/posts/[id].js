@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const paths = getAllPostIds();
   return {
     paths,
-    fallback: false, // true로 할 경우 getServerSideProps 호출
+    fallback: 'blocking', // true로 할 경우 getServerSideProps 호출
   };
 }
 
