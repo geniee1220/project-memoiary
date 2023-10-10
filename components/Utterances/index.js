@@ -11,6 +11,7 @@ function Utterances() {
         scriptElement.setAttribute('repo', 'geniee1220/project-memoirey');
         scriptElement.setAttribute('issue-term', 'pathname');
         scriptElement.setAttribute('theme', 'github-light');
+        scriptElement.setAttribute('label', 'Comment');
         scriptElement.crossOrigin = 'anonymous';
         elem.appendChild(scriptElement);
       }}
