@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { useEffect, useState } from 'react';
+import Utterances from '../../Utterances';
 
 const name = `Geniee's Memoirey`;
 export const siteTitle = 'Memoirey';
@@ -112,9 +113,12 @@ export default function MainTemplate({ children, home }) {
         <main>{children}</main>
 
         {!home && (
-          <div className={styles.backToHome}>
-            <Link href="/">← Back to home</Link>
-          </div>
+          <>
+            <Utterances />
+            <div className={styles.backToHome}>
+              <Link href="/">← Back to home</Link>
+            </div>
+          </>
         )}
       </div>
     </div>
