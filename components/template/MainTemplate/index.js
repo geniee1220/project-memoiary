@@ -4,63 +4,113 @@ import styles from './MainTemplate.module.css';
 import utilStyles from '../../../styles/utils.module.css';
 import Link from 'next/link';
 
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
+import { useEffect, useState } from 'react';
+
 const name = `Geniee's Memoirey`;
 export const siteTitle = 'Memoirey';
 
 export default function MainTemplate({ children, home }) {
+  const [theme, setTheme] = useState(() => {
+    typeof window !== 'undefined'
+      ? localStorage.getItem('theme') === 'dark'
+        ? 'dark'
+        : 'light'
+      : 'light';
+  });
+
+  const handleTheme = () => {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark') {
+      localStorage.setItem('theme', 'light');
+      setTheme('light');
+    } else {
+      localStorage.setItem('theme', 'dark');
+      setTheme('dark');
+    }
+  };
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.querySelector('body').classList.add('dark');
+    } else {
+      document.querySelector('body').classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="새삼스러운 오늘의 기록 Memoirey" />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpeg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=""
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
+    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-200 h-screen">
+      <div className={styles.container}>
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="description" content="새삼스러운 오늘의 기록 Memoirey" />
+          <meta
+            property="og:image"
+            content={`https://og-image.vercel.app/${encodeURI(
+              siteTitle
+            )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+          />
+          <meta name="og:title" content={siteTitle} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </Head>
+
+        {/* 다크 모드 */}
+        <button
+          type="button"
+          aria-label="theme switch button"
+          className="w-6 h-6"
+          onClick={handleTheme}
+        >
+          {theme === 'light' ? (
+            <MdDarkMode className="w-full h-full" />
+          ) : (
+            <MdLightMode className="w-full h-full" />
+          )}
+        </button>
+
+        <header className={styles.header}>
+          {home ? (
+            <>
               <Image
                 priority
                 src="/images/profile.jpeg"
                 className={utilStyles.borderCircle}
-                height={108}
-                width={108}
+                height={144}
+                width={144}
                 alt=""
               />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
+              <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            </>
+          ) : (
+            <>
+              <Link href="/">
+                <Image
+                  priority
+                  src="/images/profile.jpeg"
+                  className={utilStyles.borderCircle}
+                  height={108}
+                  width={108}
+                  alt=""
+                />
               </Link>
-            </h2>
-          </>
+              <h2 className={utilStyles.headingLg}>
+                <Link href="/" className={utilStyles.colorInherit}>
+                  {name}
+                </Link>
+              </h2>
+            </>
+          )}
+        </header>
+
+        <main>{children}</main>
+
+        {!home && (
+          <div className={styles.backToHome}>
+            <Link href="/">← Back to home</Link>
+          </div>
         )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
