@@ -11,17 +11,22 @@ const name = `Geniee's Memoirey`;
 export const siteTitle = 'Memoirey';
 
 export default function MainTemplate({ children, home }) {
-  const [theme, setTheme] = useState(() => {
+  const [theme, setTheme] = useState(() =>
     typeof window !== 'undefined'
       ? localStorage.getItem('theme') === 'dark'
         ? 'dark'
         : 'light'
-      : 'light';
-  });
+      : 'light'
+  );
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, [setLoaded]);
 
   const handleTheme = () => {
     const theme = localStorage.getItem('theme');
-
     if (theme === 'dark') {
       localStorage.setItem('theme', 'light');
       setTheme('light');
@@ -56,18 +61,19 @@ export default function MainTemplate({ children, home }) {
         </Head>
 
         {/* 다크 모드 */}
-        <button
-          type="button"
-          aria-label="theme switch button"
-          className="w-6 h-6"
-          onClick={handleTheme}
-        >
-          {theme === 'light' ? (
-            <MdDarkMode className="w-full h-full" />
-          ) : (
-            <MdLightMode className="w-full h-full" />
-          )}
-        </button>
+        {loaded && theme == 'light' ? (
+          <MdDarkMode
+            aria-label="theme switch button"
+            className="w-6 h-6 cursor-pointer"
+            onClick={handleTheme}
+          />
+        ) : (
+          <MdLightMode
+            aria-label="theme switch button cursor-pointer"
+            className="w-6 h-6"
+            onClick={handleTheme}
+          />
+        )}
 
         <header className={styles.header}>
           {home ? (
