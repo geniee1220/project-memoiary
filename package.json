@@ -3,13 +3,15 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "date-fns": "^2.30.0",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "next-mdx-remote": "^4.4.1",
+    "next-sitemap": "^4.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
