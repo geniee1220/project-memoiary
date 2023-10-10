@@ -114,7 +114,6 @@ export default function MainTemplate({ children, home }) {
 
         {!home && (
           <>
-            <Utterances />
             <div className={styles.backToHome}>
               <Link href="/">← Back to home</Link>
             </div>

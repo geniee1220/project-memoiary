@@ -8,6 +8,7 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 import { MDXRemote } from 'next-mdx-remote';
 
 import utilStyles from '../../styles/utils.module.css';
+import Utterances from '../../components/Utterances';
 
 // 동적인 페이지를 위해 getStaticPaths와 getStaticProps를 사용
 export async function getStaticPaths() {
@@ -54,9 +55,10 @@ function Post({ postData }) {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
+        <div className={`mb-8 ${utilStyles.lightText}`}>
           <Date dateString={postData.date} />
         </div>
+
         {postData.contentHtml && (
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         )}
@@ -65,6 +67,7 @@ function Post({ postData }) {
           <MDXRemote {...postData.mdxSource} components={components} />
         )}
       </article>
+      <Utterances />
     </MainTemplate>
   );
 }

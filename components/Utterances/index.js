@@ -3,6 +3,7 @@ import { memo } from 'react';
 function Utterances() {
   return (
     <section
+      className="mt-10"
       ref={(elem) => {
         if (!elem) return;
         const scriptElement = document.createElement('script');
