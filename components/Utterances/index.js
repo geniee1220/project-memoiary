@@ -1,22 +1,21 @@
-import React from 'react';
+import { memo } from 'react';
 
 function Utterances() {
   return (
     <section
       ref={(elem) => {
         if (!elem) return;
-        const scriptElem = document.createElement('script');
-        scriptElem.src = 'https://utteranc.es/client.js';
-        scriptElem.async = true;
-        scriptElem.crossOrigin = 'anonymous';
-        scriptElem.setAttribute('repo', 'geniee1220/project-memoirey');
-        scriptElem.setAttribute('issue-term', 'pathname');
-        scriptElem.setAttribute('label', 'Comment');
-        scriptElem.setAttribute('theme', 'github-light');
-        elem.appendChild(scriptElem);
+        const scriptElement = document.createElement('script');
+        scriptElement.src = 'https://utteranc.es/client.js';
+        scriptElement.async = true;
+        scriptElement.setAttribute('repo', 'geniee1220/project-memoirey');
+        scriptElement.setAttribute('issue-term', 'pathname');
+        scriptElement.setAttribute('theme', 'github-light');
+        scriptElement.crossOrigin = 'anonymous';
+        elem.appendChild(scriptElement);
       }}
-    ></section>
+    />
   );
 }
 
-export default Utterances;
+export default memo(Utterances);
