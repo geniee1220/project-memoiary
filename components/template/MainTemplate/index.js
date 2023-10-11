@@ -7,8 +7,8 @@ import Link from 'next/link';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 
-const name = `Geniee's Memoirey`;
-export const siteTitle = 'Memoirey';
+const name = `Geniee's Memoiary`;
+export const siteTitle = 'Memoiary';
 
 export default function MainTemplate({ children, home }) {
   const [theme, setTheme] = useState(() =>
