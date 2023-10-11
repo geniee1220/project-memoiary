@@ -49,7 +49,7 @@ export default function MainTemplate({ children, home }) {
       <div className={styles.container}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <meta name="description" content="새삼스러운 오늘의 기록 Memoirey" />
+          <meta name="description" content="오늘을 기록하는 일기장" />
           <meta
             property="og:image"
             content={`https://og-image.vercel.app/${encodeURI(
